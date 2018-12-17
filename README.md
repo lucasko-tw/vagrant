@@ -22,23 +22,23 @@ vagrant up
 
 ```sh
 Vagrant.configure("2") do |config|
- 
-  # Desktop version of CentOS 7
+
   config.vm.box = "esss/centos-7.1-desktop"
-  
-  # Host-Only Adapter
-  config.vm.network "private_network", :type => 'dhcp', :name => 'vboxnet0', :adapter => 2
-    
+  config.vm.network "private_network", :type => 'dhcp', :adapter => 2
+  config.vm.network "forwarded_port", host: 80 , guest: 8080
+
   config.vm.provider "virtualbox" do |vbox|
     vbox.name = "My CentOS 7"
     vbox.memory = 2048
     vbox.cpus = 2
+
   end
 
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "playbook.yml"
   end
 
+end
 ```
 
 ### Run

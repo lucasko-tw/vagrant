@@ -2,6 +2,8 @@
 - hosts: all
   become: true
   tasks:
+
+# Install Basic Package    
     - name: install the latest version of vim
       yum:
         name: vim
@@ -12,8 +14,7 @@
         name: git
         state: latest
 
-
-
+# Install Docker
     - name: Upgrade all packages
       yum: name=* state=latest
 
@@ -71,5 +72,32 @@
         - docker_compose_check.msg is defined
         - docker_compose_check.msg.find('No such file or directory') != -1
 
+# Install Docker Tool for Running Container
+    - name: Easy Install
+      yum:
+        name: python-setuptools
+        state: present
 
+    - name: Install pip
+      easy_install: 
+       name: pip
+       state: latest
 
+    - name: pip install docker-py
+      pip:
+        name: docker-py
+
+# Run Container 
+    - name: Docker Pull Image
+      docker_image: 
+        name: tomcat
+        tag: 8
+        
+    - name: Run Docker for Tomcat 8
+      docker_container:
+        name: helloworld
+        image: tomcat:8
+        state: started
+        restart: yes
+        ports:
+          - "8080:8080"
