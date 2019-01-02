@@ -1,3 +1,9 @@
+### Install Brew on Mac
+
+```sh
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
 ### Install vagrant on Mac
 
 ```sh
