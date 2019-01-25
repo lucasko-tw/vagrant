@@ -62,6 +62,18 @@ vagrant reload
 vagrant ssh
 ```
 
+
+### Stop VM
+```
+vagrant halt
+```
+
+
+### Remove VM
+```
+vagrant destroy
+```
+
 ### Install Ansible on Host
 
 ```
